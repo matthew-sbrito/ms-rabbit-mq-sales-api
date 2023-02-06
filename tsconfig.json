@@ -1,0 +1,32 @@
+{
+  "compilerOptions": {
+    "target": "ES2020",
+    "module": "commonjs",
+    "rootDir": ".",
+    "outDir": "dist",
+    "baseUrl": ".",
+    "paths": {
+      "@helpers/*": ["src/helpers/*"],
+      "@libs/*": ["src/libs/*"],
+      "@controllers/*": ["src/controllers/*"],
+      "@services/*": ["src/services/*"],
+      "@repositories/*": ["src/repositories/*"],
+      "@plugins/*": ["src/plugins/*"],
+      "@rabbitmq/*": ["src/rabbitmq/*"],
+      "@routes/*": ["src/routes/*"]
+    },
+    "typeRoots": ["./src/@types"],
+    "declaration": true,
+    "esModuleInterop": true,
+    "strict": true,
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true
+  },
+  "include": [
+    "src/**/*"
+  ],
+  "exclude": [
+    "**/*.spec.ts",
+    "**/mock/*"
+  ]
+}

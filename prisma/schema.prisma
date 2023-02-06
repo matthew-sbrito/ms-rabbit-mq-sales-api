@@ -1,0 +1,39 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mongodb"
+  url      = env("DATABASE_URL")
+}
+
+model Order {
+  id                String          @id @default(auto()) @map("_id") @db.ObjectId
+  products          ProductOrder[]
+  applicationUser   ApplicationUser @relation(fields: [applicationUserId], references: [id])
+  applicationUserId String          @db.ObjectId
+  status            OrderStatus
+  createdAt         DateTime        @default(now())
+  updatedAt         DateTime        @updatedAt
+}
+
+model ProductOrder {
+  id        String @id @default(auto()) @map("_id") @db.ObjectId
+  order     Order  @relation(fields: [orderId], references: [id])
+  orderId   String @db.ObjectId
+  productId BigInt
+  quantity  Int
+}
+
+model ApplicationUser {
+  id     String  @id @default(auto()) @map("_id") @db.ObjectId
+  name   String
+  email  String  @unique
+  orders Order[]
+}
+
+enum OrderStatus {
+  PENDING
+  APPROVED
+  REJECT
+}
